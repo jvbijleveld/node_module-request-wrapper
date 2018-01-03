@@ -30,11 +30,9 @@ exports.wrap = function(entity, request){
 	}
 	return ret;
 }
-
 formatDate = function(inp, format){
-	return moment(inp, format);
+	return moment(inp, format).toDate();
 }
-
 formatDateTime = function(inp, format){
-	return moment(inp.replace('T',' '), format);
+	return moment(inp.replace('T',' '), format).toDate();
 }

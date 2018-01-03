@@ -1,30 +1,30 @@
+// @author: Jeffrey van Bijleveld
+
 var moment = require('moment');
 
 exports.wrap = function(entity, request){
 	var ret = {};
-	console.log("wrapping entity: " + JSON.stringify(entity));
 	for(var key in entity){
-		console.log("parsing field " + JSON.stringify(key));
-		if(request.body[key] !== undefined){
+			if(request[key] !== undefined){
 			switch(entity[key].type){
 				case "integer":
-					ret[key] = parseInt(request.body[key]);
+					ret[key] = parseInt(request[key]);
 					break;
 					
 				case "float":
-					ret[key] = parseFloat(request.body[key]);
+					ret[key] = parseFloat(request[key]);
 					break;
 					
 				case "date":
-					ret[key] = formatDate(request.body[key], entity[key].format);
+					ret[key] = formatDate(request[key], entity[key].format);
 					break;
 					
 				case "datetime":
-					ret[key] = formatDateTime(request.body[key], entity[key].format);
+					ret[key] = formatDateTime(request[key], entity[key].format);
 					break;
 					
 				default :
-					ret[key] = request.body[key];
+					ret[key] = request[key];
 			}
 		}
 	}
